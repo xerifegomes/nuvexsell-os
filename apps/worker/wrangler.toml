@@ -35,7 +35,7 @@ producers = [
 ]
 
 # Worker IA Bindings
-[[ai]]
+[ai]
 binding = "AI"
 model = "@cf/meta/llama-2-7b-chat-int8"
 
@@ -72,7 +72,7 @@ producers = [
   { binding = "ORDER_QUEUE", queue = "order-queue" }
 ]
 
-[[env.staging.ai]]
+[env.staging.ai]
 binding = "AI"
 model = "@cf/meta/llama-2-7b-chat-int8"
 
@@ -109,6 +109,6 @@ producers = [
   { binding = "ORDER_QUEUE", queue = "order-queue" }
 ]
 
-[[env.production.ai]]
+[env.production.ai]
 binding = "AI"
 model = "@cf/meta/llama-2-7b-chat-int8"
