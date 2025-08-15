@@ -3,6 +3,8 @@ export interface Env {
   ENVIRONMENT: 'development' | 'staging' | 'production'
   JWT_SECRET: string
   STRIPE_SECRET: string
+  STRIPE_PUBLISHABLE: string
+  STRIPE_WEBHOOK_SECRET: string
   OLLAMA_HOST: string
 
   // Cloudflare bindings
@@ -14,6 +16,10 @@ export interface Env {
   SCRAPE_QUEUE: Queue
   AI_SCORE_QUEUE: Queue
   ORDER_QUEUE: Queue
+  AI: any // Cloudflare Worker IA
+
+  // Stripe
+  STRIPE: any
 }
 
 export interface Context {

@@ -137,4 +137,7 @@ jobs:
           path: |
             apps/webapp/.next/
             packages/core/dist/
+            packages/scraper/dist/
+            packages/ai-scoring/dist/
+            packages/ops-automation/dist/
           retention-days: 7

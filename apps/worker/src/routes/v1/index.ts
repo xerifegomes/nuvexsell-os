@@ -1,5 +1,7 @@
 import { Hono } from 'hono'
 import { scrape } from './scrape'
+import { ai } from './ai'
+import { orders } from './orders'
 import type { Env, Context } from '../../types/env'
 import type { Logger } from '../../utils/logger'
 
@@ -8,44 +10,42 @@ const v1 = new Hono<{
   Variables: { context: Context; logger: Logger }
 }>()
 
-// Mount scraping routes
+// Mount all route modules
 v1.route('/scrape', scrape)
+v1.route('/ai', ai)
+v1.route(./orders., orders)
+v1.route(./stripe., stripe)
 
-// Placeholder routes for other modules
-v1.get('/ai/score', async (c) => {
-  const context = c.get('context')
-  return c.json({
-    success: false,
-    error: {
-      code: 'NOT_IMPLEMENTED',
-      message: 'AI scoring not yet implemented'
-    },
-    requestId: context.requestId
-  }, 501)
-})
-
-v1.post('/orders', async (c) => {
-  const context = c.get('context')
-  return c.json({
-    success: false,
-    error: {
-      code: 'NOT_IMPLEMENTED',
-      message: 'Order management not yet implemented'
-    },
-    requestId: context.requestId
-  }, 501)
-})
-
+// Stock sync endpoint
 v1.post('/stock/sync', async (c) => {
   const context = c.get('context')
-  return c.json({
-    success: false,
-    error: {
-      code: 'NOT_IMPLEMENTED',
-      message: 'Stock sync not yet implemented'
-    },
-    requestId: context.requestId
-  }, 501)
+  const logger = c.get('logger')
+
+  try {
+    const body = await c.req.json()
+    
+    logger.info('Stock sync requested', { provider: body.provider })
+
+    const jobId = generateId()
+
+    return c.json({
+      success: true,
+      data: { jobId },
+      requestId: context.requestId
+    })
+
+  } catch (error) {
+    logger.error('Stock sync failed', error as Error)
+    
+    return c.json({
+      success: false,
+      error: {
+        code: 'INTERNAL_ERROR',
+        message: 'Stock sync failed'
+      },
+      requestId: context.requestId
+    }, 500)
+  }
 })
 
 export { v1 }

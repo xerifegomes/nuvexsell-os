@@ -46,8 +46,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build core package
-        run: pnpm --filter @nuvexsell/core build
+      - name: Build packages
+        run: |
+          pnpm --filter @nuvexsell/core build
+          pnpm --filter @nuvexsell/scraper build
+          pnpm --filter @nuvexsell/ai-scoring build
+          pnpm --filter @nuvexsell/ops-automation build
 
       - name: Deploy to Cloudflare Workers (Staging)
         uses: cloudflare/wrangler-action@v3
@@ -89,8 +93,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build core package
-        run: pnpm --filter @nuvexsell/core build
+      - name: Build packages
+        run: |
+          pnpm --filter @nuvexsell/core build
+          pnpm --filter @nuvexsell/scraper build
+          pnpm --filter @nuvexsell/ai-scoring build
+          pnpm --filter @nuvexsell/ops-automation build
 
       - name: Deploy to Cloudflare Workers (Production)
         uses: cloudflare/wrangler-action@v3

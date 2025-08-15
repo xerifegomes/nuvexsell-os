@@ -34,6 +34,11 @@ producers = [
   { binding = "ORDER_QUEUE", queue = "order-queue" }
 ]
 
+# Worker IA Bindings
+[[ai]]
+binding = "AI"
+model = "@cf/meta/llama-2-7b-chat-int8"
+
 # Staging Environment
 [env.staging]
 name = "nuvexsell-worker-staging"
@@ -67,6 +72,10 @@ producers = [
   { binding = "ORDER_QUEUE", queue = "order-queue" }
 ]
 
+[[env.staging.ai]]
+binding = "AI"
+model = "@cf/meta/llama-2-7b-chat-int8"
+
 # Production Environment
 [env.production]
 name = "nuvexsell-worker-prod"
@@ -99,3 +108,7 @@ producers = [
   { binding = "AI_SCORE_QUEUE", queue = "ai-pipeline" },
   { binding = "ORDER_QUEUE", queue = "order-queue" }
 ]
+
+[[env.production.ai]]
+binding = "AI"
+model = "@cf/meta/llama-2-7b-chat-int8"

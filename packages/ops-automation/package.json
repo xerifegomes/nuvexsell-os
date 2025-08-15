@@ -1,0 +1,22 @@
+{
+  "name": "@nuvexsell/ops-automation",
+  "version": "0.1.0",
+  "description": "Automação de pedidos e estoque para NuvexSell OS",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest --coverage"
+  },
+  "dependencies": {
+    "@nuvexsell/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2",
+    "@vitest/coverage-v8": "^1.2.2"
+  }
+}
