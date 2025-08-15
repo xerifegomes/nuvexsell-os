@@ -47,7 +47,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const form = useForm<LoginForm>({
+  const form = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",

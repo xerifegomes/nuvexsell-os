@@ -39,6 +39,32 @@ producers = [
 binding = "AI"
 model = "@cf/meta/llama-2-7b-chat-int8"
 
+# Cron triggers para autopilot
+[triggers]
+crons = [
+  "0 * * * *",   # Execute autopilot every hour
+  "0 0 * * *"    # Execute migrations daily at midnight
+]
+
+# Queue consumers
+[[queues.consumers]]
+queue = "product-processing"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+
+[[queues.consumers]]
+queue = "ai-pipeline"
+max_batch_size = 5
+max_batch_timeout = 60
+max_retries = 3
+
+[[queues.consumers]]
+queue = "order-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+
 # Staging Environment
 [env.staging]
 name = "nuvexsell-worker-staging"
@@ -76,6 +102,30 @@ producers = [
 binding = "AI"
 model = "@cf/meta/llama-2-7b-chat-int8"
 
+[env.staging.triggers]
+crons = [
+  "0 * * * *",   # Execute autopilot every hour
+  "0 0 * * *"    # Execute migrations daily at midnight
+]
+
+[[env.staging.queues.consumers]]
+queue = "product-processing"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+
+[[env.staging.queues.consumers]]
+queue = "ai-pipeline"
+max_batch_size = 5
+max_batch_timeout = 60
+max_retries = 3
+
+[[env.staging.queues.consumers]]
+queue = "order-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+
 # Production Environment
 [env.production]
 name = "nuvexsell-worker-prod"
@@ -112,3 +162,27 @@ producers = [
 [env.production.ai]
 binding = "AI"
 model = "@cf/meta/llama-2-7b-chat-int8"
+
+[env.production.triggers]
+crons = [
+  "0 * * * *",   # Execute autopilot every hour
+  "0 0 * * *"    # Execute migrations daily at midnight
+]
+
+[[env.production.queues.consumers]]
+queue = "product-processing"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+
+[[env.production.queues.consumers]]
+queue = "ai-pipeline"
+max_batch_size = 5
+max_batch_timeout = 60
+max_retries = 3
+
+[[env.production.queues.consumers]]
+queue = "order-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3

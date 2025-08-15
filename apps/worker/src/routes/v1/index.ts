@@ -3,6 +3,7 @@ import { scrape } from './scrape'
 import { ai } from './ai'
 import { orders } from './orders'
 import { stripe } from './stripe'
+import autopilot from './autopilot'
 import { generateId } from '@nuvexsell/core'
 import type { Env, Context } from '../../types/env'
 import type { Logger } from '../../utils/logger'
@@ -17,6 +18,7 @@ v1.route('/scrape', scrape)
 v1.route('/ai', ai)
 v1.route('/orders', orders)
 v1.route('/stripe', stripe)
+v1.route('/autopilot', autopilot)
 
 // Stock sync endpoint
 v1.post('/stock/sync', async (c) => {
