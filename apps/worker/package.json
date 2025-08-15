@@ -1,0 +1,31 @@
+{
+  "name": "@nuvexsell/worker",
+  "version": "0.1.0",
+  "description": "Cloudflare Worker API for NuvexSell OS",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "wrangler deploy --dry-run",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:prod": "wrangler deploy --env production",
+    "lint": "eslint . --ext .ts",
+    "test": "vitest",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@nuvexsell/core": "workspace:*",
+    "hono": "^4.0.8",
+    "hono-rate-limiter": "^0.3.0",
+    "@hono/node-server": "^1.8.2",
+    "zod": "^3.22.4",
+    "jose": "^5.2.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240208.0",
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2",
+    "wrangler": "^3.28.2"
+  }
+}

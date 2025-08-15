@@ -1,0 +1,101 @@
+name = "nuvexsell-worker"
+main = "src/index.ts"
+compatibility_date = "2024-02-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ENVIRONMENT = "development"
+
+[[d1_databases]]
+binding = "D1_DB"
+database_name = "nuvexsell-db"
+database_id = "6b00a85f-d539-49db-896c-8790b00448de"
+
+[[kv_namespaces]]
+binding = "LOGS_KV"
+id = "b72c4cbed214429b95fa9c85ddfb207f"
+
+[[kv_namespaces]]
+binding = "SESSION_KV"
+id = "a583151722b34841ba0f246b7df3d6df"
+
+[[kv_namespaces]]
+binding = "RATE_KV"
+id = "95a30f153bd44b0ab84aaeb44336bcd3"
+
+[[r2_buckets]]
+binding = "PRODUCT_MEDIA"
+bucket_name = "nuvexsell-assets"
+
+[queues]
+producers = [
+  { binding = "SCRAPE_QUEUE", queue = "product-processing" },
+  { binding = "AI_SCORE_QUEUE", queue = "ai-pipeline" },
+  { binding = "ORDER_QUEUE", queue = "order-queue" }
+]
+
+# Staging Environment
+[env.staging]
+name = "nuvexsell-worker-staging"
+vars = { ENVIRONMENT = "staging" }
+
+[[env.staging.d1_databases]]
+binding = "D1_DB"
+database_name = "nuvexsell-db-staging"
+database_id = "f3870eeb-0682-423f-921e-322801f6ed94"
+
+[[env.staging.kv_namespaces]]
+binding = "LOGS_KV"
+id = "7431e781fae74397bd7391b5d30d9138"
+
+[[env.staging.kv_namespaces]]
+binding = "SESSION_KV"
+id = "a583151722b34841ba0f246b7df3d6df"
+
+[[env.staging.kv_namespaces]]
+binding = "RATE_KV"
+id = "95a30f153bd44b0ab84aaeb44336bcd3"
+
+[[env.staging.r2_buckets]]
+binding = "PRODUCT_MEDIA"
+bucket_name = "nuvexsell-storage"
+
+[env.staging.queues]
+producers = [
+  { binding = "SCRAPE_QUEUE", queue = "product-processing" },
+  { binding = "AI_SCORE_QUEUE", queue = "ai-pipeline" },
+  { binding = "ORDER_QUEUE", queue = "order-queue" }
+]
+
+# Production Environment
+[env.production]
+name = "nuvexsell-worker-prod"
+vars = { ENVIRONMENT = "production" }
+
+[[env.production.d1_databases]]
+binding = "D1_DB"
+database_name = "nuvexsell-db-prod"
+database_id = "fd1a3141-b6c4-4460-9b13-b26e8d31f032"
+
+[[env.production.kv_namespaces]]
+binding = "LOGS_KV"
+id = "d5ddd4319f9f46ea8dd513005823224b"
+
+[[env.production.kv_namespaces]]
+binding = "SESSION_KV"
+id = "a583151722b34841ba0f246b7df3d6df"
+
+[[env.production.kv_namespaces]]
+binding = "RATE_KV"
+id = "95a30f153bd44b0ab84aaeb44336bcd3"
+
+[[env.production.r2_buckets]]
+binding = "PRODUCT_MEDIA"
+bucket_name = "nuvexsell-uploads"
+
+[env.production.queues]
+producers = [
+  { binding = "SCRAPE_QUEUE", queue = "product-processing" },
+  { binding = "AI_SCORE_QUEUE", queue = "ai-pipeline" },
+  { binding = "ORDER_QUEUE", queue = "order-queue" }
+]
