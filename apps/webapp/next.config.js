@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['@nuvexsell/core'],
-  experimental: {
-    appDir: true
-  },
   images: {
     domains: [
       'localhost',
