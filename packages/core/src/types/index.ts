@@ -91,6 +91,7 @@ export interface Order {
   currency: string
   createdAt: Date
   updatedAt: Date
+  externalOrderId?: string
 }
 
 export interface OrderItem {
@@ -105,6 +106,7 @@ export interface Address {
   state: string
   zipCode: string
   country: string
+  email?: string
 }
 
 export interface Stock {
